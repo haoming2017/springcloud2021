@@ -1,0 +1,36 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-center
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/haoming2017/sprincloud-config.git #github 远程仓库地址
+          #在远程仓库地址下面搜索仓库名称
+          search-paths:
+            - springcloud-config
+          username: haoming2017
+          password: hjn12186449
+      #远程仓库读取分支名
+      label: main
+  #消息中间件配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+eureka:
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:7001/eureka  #单机版
+      #defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka #集群版
+  #暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'
